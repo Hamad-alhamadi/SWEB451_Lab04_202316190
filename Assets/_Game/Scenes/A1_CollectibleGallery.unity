@@ -280,6 +280,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 24305003}
     m_Modifications:
+    - target: {fileID: 6628027957797227105, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
+      propertyPath: bobSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628027957797227105, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
+      propertyPath: bobHeight
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628027957797227105, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
+      propertyPath: rotationSpeed
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 8209558614115539793, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
       propertyPath: m_Name
       value: Collectible_Left
@@ -879,6 +891,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 24305003}
     m_Modifications:
+    - target: {fileID: 6628027957797227105, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
+      propertyPath: bobSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628027957797227105, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
+      propertyPath: bobHeight
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628027957797227105, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
+      propertyPath: rotationSpeed
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 8209558614115539793, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
       propertyPath: m_Name
       value: Collectible_Right
@@ -953,6 +977,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 24305003}
     m_Modifications:
+    - target: {fileID: 6628027957797227105, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
+      propertyPath: bobHeight
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628027957797227105, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
+      propertyPath: rotationSpeed
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: 8209558614115539793, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
       propertyPath: m_Name
       value: Collectible_Center
