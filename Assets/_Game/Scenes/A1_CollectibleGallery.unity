@@ -982,6 +982,10 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6628027957797227105, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
+      propertyPath: enableBobbing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628027957797227105, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
       propertyPath: rotationSpeed
       value: -60
       objectReference: {fileID: 0}

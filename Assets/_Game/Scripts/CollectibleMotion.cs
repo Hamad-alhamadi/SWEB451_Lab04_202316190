@@ -6,6 +6,7 @@ public class CollectibleMotion : MonoBehaviour
     [SerializeField] private float rotationSpeed = 60f;
 
     [Header("Bobbing")]
+    [SerializeField] private bool enableBobbing = true;
     [SerializeField] private float bobHeight = 0.25f;
     [SerializeField] private float bobSpeed = 2f;
 
@@ -28,8 +29,16 @@ public class CollectibleMotion : MonoBehaviour
             rotationSpeed * Time.deltaTime,
             Space.Self);
 
-        float offsetY = Mathf.Sin(Time.time * bobSpeed) * bobHeight;
-        transform.localPosition =
+        // Bobbing is optional; rotation stays active.
+        if (enableBobbing)
+        {
+            float offsetY = Mathf.Sin(Time.time * bobSpeed) * bobHeight;
+            transform.localPosition =
             startLocalPosition + Vector3.up * offsetY;
+        }
+        else
+        {
+            transform.localPosition = startLocalPosition;
+        }
     }
 }
