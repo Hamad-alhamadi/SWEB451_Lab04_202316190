@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7309952713443081685}
   - component: {fileID: 7542312756008387952}
   - component: {fileID: 7681748814413858443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 6922031106864544971}
   - component: {fileID: 7730542225312481257}
   - component: {fileID: 255730892949718650}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Accent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8331683055540292270}
   - component: {fileID: 6628027957797227105}
-  m_Layer: 0
+  - component: {fileID: 1803110451589312840}
+  - component: {fileID: 1003398460219269300}
+  m_Layer: 7
   m_Name: PFB_Collectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,5 +275,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleMotion
   rotationSpeed: 60
+  enableBobbing: 1
   bobHeight: 0.25
   bobSpeed: 2
+--- !u!135 &1803110451589312840
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8209558614115539793}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1003398460219269300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8209558614115539793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a244ae470b67a4888babd839dd64993d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollectiblePickup
+  value: 1
+  pickupClip: {fileID: 8300000, guid: ea67a04a9787d4f5eb32cb63f8552a35, type: 3}
+  volume: 0.4
