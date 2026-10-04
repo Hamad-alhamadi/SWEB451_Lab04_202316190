@@ -190,7 +190,10 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: aa2d933b932e04b779112e7ec05948f6, type: 2}
   moveAction: {fileID: 3738169348429853557, guid: 91d233f86c2614bfa90fdf1ea5abfe03, type: 3}
   jumpAction: {fileID: -8227946058428903392, guid: 91d233f86c2614bfa90fdf1ea5abfe03, type: 3}
+  sprintAction: {fileID: 0}
+  sprintMultiplier: 1.5
+  airControlMultiplier: 0.35
   groundLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   groundPadding: 0.15
