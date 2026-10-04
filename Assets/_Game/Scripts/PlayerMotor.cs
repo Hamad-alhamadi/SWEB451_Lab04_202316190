@@ -10,6 +10,14 @@ public class PlayerMotor : MonoBehaviour
     [Header("Input Actions")]
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference jumpAction;
+    [SerializeField] private InputActionReference sprintAction;
+    private Vector3 respawnPosition;
+
+    [SerializeField] private float sprintMultiplier = 1.5f;
+
+    [Header("Air Control")]
+    [SerializeField, Range(0f, 1f)]
+    private float airControlMultiplier = 0.35f;
 
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundLayers;
@@ -25,12 +33,14 @@ public class PlayerMotor : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         bodyCollider = GetComponent<Collider>();
+        respawnPosition = config.respawnPosition;
     }
 
     private void OnEnable()
     {
         moveAction.action.Enable();
         jumpAction.action.Enable();
+        sprintAction.action.Enable();
         jumpAction.action.performed += QueueJump;
     }
 
@@ -39,11 +49,58 @@ public class PlayerMotor : MonoBehaviour
         jumpAction.action.performed -= QueueJump;
         moveAction.action.Disable();
         jumpAction.action.Disable();
+        sprintAction.action.Disable();
     }
 
     private void Update()
     {
+        ReadMoveInput();
+    }
+
+    private void ReadMoveInput()
+    {
         moveInput = moveAction.action.ReadValue<Vector2>();
+    }
+
+    private float GetActiveMoveSpeed()
+    {
+        float activeSpeed = config.moveSpeed;
+
+        if (sprintAction.action.IsPressed())
+        {
+            activeSpeed *= sprintMultiplier;
+        }
+
+        return activeSpeed;
+    }
+
+    private float GetActiveAcceleration(bool grounded)
+    {
+        return grounded
+            ? config.acceleration
+            : config.acceleration * airControlMultiplier;
+    }
+
+    private void ApplyHorizontalMovement(
+    Vector3 desiredHorizontal,
+    float activeAcceleration)
+    {
+        Vector3 currentVelocity = body.linearVelocity;
+
+        Vector3 currentHorizontal = new Vector3(
+            currentVelocity.x,
+            0f,
+            currentVelocity.z);
+
+        Vector3 nextHorizontal = Vector3.MoveTowards(
+            currentHorizontal,
+            desiredHorizontal,
+            activeAcceleration * Time.fixedDeltaTime);
+
+        body.linearVelocity = new Vector3(
+            nextHorizontal.x,
+            currentVelocity.y,
+            nextHorizontal.z);
     }
 
     private void FixedUpdate()
@@ -56,26 +113,24 @@ public class PlayerMotor : MonoBehaviour
             desiredHorizontal.Normalize();
         }
 
-        desiredHorizontal *= config.moveSpeed;
+        float activeSpeed = GetActiveMoveSpeed();
 
-        Vector3 currentVelocity = body.linearVelocity;
+        desiredHorizontal *= activeSpeed;
 
-        Vector3 currentHorizontal = new Vector3(
-            currentVelocity.x,
-            0f,
-            currentVelocity.z);
+        bool grounded = IsGrounded();
 
-        Vector3 nextHorizontal = Vector3.MoveTowards(
-            currentHorizontal,
-            desiredHorizontal,
-            config.acceleration * Time.fixedDeltaTime);
+        float activeAcceleration = GetActiveAcceleration(grounded);
 
-        body.linearVelocity = new Vector3(
-            nextHorizontal.x,
-            currentVelocity.y,
-            nextHorizontal.z);
+        ApplyHorizontalMovement(
+        desiredHorizontal,
+        activeAcceleration);
 
-        if (jumpRequested && IsGrounded())
+        HandleJump(grounded);
+    }
+
+    private void HandleJump(bool grounded)
+    {
+        if (jumpRequested && grounded)
         {
             body.AddForce(
                 Vector3.up * config.jumpImpulse,
@@ -103,12 +158,17 @@ public class PlayerMotor : MonoBehaviour
             QueryTriggerInteraction.Ignore);
     }
 
-    public void Respawn(Vector3 worldPosition)
+    public void Respawn()
     {
-        body.position = worldPosition;
+        body.position = respawnPosition;
         body.rotation = Quaternion.identity;
         body.linearVelocity = Vector3.zero;
         body.angularVelocity = Vector3.zero;
+    }
+
+    public void SetRespawnPosition(Vector3 newPosition)
+    {
+        respawnPosition = newPosition;
     }
 
     private void OnDrawGizmosSelected()

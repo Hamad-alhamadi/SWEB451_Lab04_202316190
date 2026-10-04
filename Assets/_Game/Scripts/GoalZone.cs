@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class GoalZone : MonoBehaviour
 {
+    public static event Action CourseCompleted;
+    private bool completionRaised;
     [SerializeField] private GameSession session;
     [SerializeField] private Renderer indicatorRenderer;
     [SerializeField] private Light goalLight;
@@ -11,6 +14,7 @@ public class GoalZone : MonoBehaviour
     [SerializeField] private Color unlockedColor = Color.green;
     [SerializeField] private float lockedIntensity = 0.5f;
     [SerializeField] private float unlockedIntensity = 3f;
+    
 
     private bool unlocked;
     private Material runtimeMaterial;
@@ -79,8 +83,19 @@ public class GoalZone : MonoBehaviour
             return;
         }
 
-        Debug.Log(unlocked
-            ? "Course complete!"
-            : "Goal locked: collect every energy node.");
+        if (!unlocked)
+        {
+            Debug.Log(
+                $"Goal locked: {session.RemainingCollectibles} collectibles remaining.");
+            return;
+        }
+
+        Debug.Log($"Course complete! Respawns: {session.RespawnCount}");
+
+        if (!completionRaised)
+        {
+            completionRaised = true;
+            CourseCompleted?.Invoke();
+        }
     }
 }
