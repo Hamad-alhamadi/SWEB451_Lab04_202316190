@@ -351,15 +351,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8331683055540292270, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8331683055540292270, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8331683055540292270, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8331683055540292270, guid: 1a8cddbdf4e0c45d2bbc32d605811d3f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1383,6 +1383,50 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &869324144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 869324146}
+  - component: {fileID: 869324145}
+  m_Layer: 0
+  m_Name: CourseTimer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &869324145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869324144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e995a85045b40e9b4f7a27157aade2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CourseTimer
+--- !u!4 &869324146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869324144}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.3629, y: -0, z: 18.9732}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2694,7 +2738,7 @@ Transform:
   m_GameObject: {fileID: 1617340510}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 1.5, z: 8}
+  m_LocalPosition: {x: 5, y: 1, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2726,7 +2770,7 @@ Transform:
   m_GameObject: {fileID: 1624113840}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3029,7 +3073,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 62d543cb8b0d44fd1b619c2ede3ce81a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.12
   m_Pitch: 1
@@ -3339,3 +3383,4 @@ SceneRoots:
   - {fileID: 1652671917}
   - {fileID: 2101046784}
   - {fileID: 1617340513}
+  - {fileID: 869324146}
