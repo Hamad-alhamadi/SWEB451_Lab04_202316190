@@ -22,6 +22,7 @@ public class Lab03PlayerController : MonoBehaviour
 
     [Header("Feedback")]
     [SerializeField] private TrailRenderer sprintTrail;
+    [SerializeField] private AudioSource jumpAudio;
 
     private Rigidbody rb;
     private Vector2 moveInput;
@@ -100,6 +101,7 @@ public class Lab03PlayerController : MonoBehaviour
         if (jumpRequested && IsGrounded())
         {
             rb.AddForce(Vector3.up * jumpImpulse, ForceMode.Impulse);
+            jumpAudio.Play();
         }
 
         jumpRequested = false;
