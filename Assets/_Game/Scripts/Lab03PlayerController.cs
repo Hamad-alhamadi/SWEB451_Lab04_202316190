@@ -13,10 +13,15 @@ public class Lab03PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintMultiplier = 1.5f;
     [SerializeField] private float jumpImpulse = 6f;
+    [SerializeField] private float acceleration = 20f;
+    [SerializeField] private float deceleration = 25f;
 
     [Header("Ground Check")]
     [SerializeField] private float groundCheckDistance = 1.1f;
     [SerializeField] private LayerMask groundLayers;
+
+    [Header("Feedback")]
+    [SerializeField] private TrailRenderer sprintTrail;
 
     private Rigidbody rb;
     private Vector2 moveInput;
@@ -48,6 +53,11 @@ public class Lab03PlayerController : MonoBehaviour
     private void Update()
     {
         moveInput = moveAction.action.ReadValue<Vector2>();
+
+        bool isSprinting = sprintAction.action.IsPressed();
+        bool isMoving = moveInput.sqrMagnitude > 0.01f;
+
+        sprintTrail.emitting = isSprinting && isMoving;
     }
 
     private void FixedUpdate()
@@ -63,12 +73,28 @@ public class Lab03PlayerController : MonoBehaviour
             ? moveSpeed * sprintMultiplier
             : moveSpeed;
 
-        Vector3 targetVelocity = movement * currentSpeed;
+        Vector3 currentHorizontal = new Vector3(
+            rb.linearVelocity.x,
+            0f,
+            rb.linearVelocity.z
+        );
+
+        Vector3 targetHorizontal = movement * currentSpeed;
+
+        float rate = targetHorizontal.sqrMagnitude > 0.001f
+            ? acceleration
+            : deceleration;
+
+        Vector3 nextHorizontal = Vector3.MoveTowards(
+            currentHorizontal,
+            targetHorizontal,
+            rate * Time.fixedDeltaTime
+        );
 
         rb.linearVelocity = new Vector3(
-            targetVelocity.x,
+            nextHorizontal.x,
             rb.linearVelocity.y,
-            targetVelocity.z
+            nextHorizontal.z
         );
 
         if (jumpRequested && IsGrounded())
